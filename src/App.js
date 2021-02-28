@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 
-function App() {
+import { Menu } from './componentes/Menu';
+
+import PaginaInicio from './paginas/PaginaInicio';
+import PaginaPosts from './paginas/PaginaPosts';
+import PaginaPost from './paginas/PaginaPost';
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <Menu />
+      <Switch>
+        <Route exact path="/" component={PaginaInicio} />
+        <Route exact path="/posts" component={PaginaPosts} />
+        <Route exact path="/posts/:postId" component={PaginaPost} />
+        <Redirect to="/" />
+      </Switch>
+    </Router>
+  )
 }
 
 export default App;
